@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị - Nông Trại Vui Vẻ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        #admin-login {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        #admin-panel {
+            display: none;
+            padding: 20px;
+        }
+        .admin-section {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div id="admin-login">
+        <h2>🔐 Đăng nhập quản trị</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label>Mật khẩu:</label>
+                <input type="password" id="admin-password" required>
+            </div>
+            <button type="submit" class="btn-primary">Đăng nhập</button>
+            <p id="login-error" style="color: red; display: none;">Mật khẩu không đúng!</p>
+        </form>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel">
+        <header style="background: #2c3e50; color: white; padding: 20px; margin: -20px -20px 20px -20px;">
+            <h1>⚙️ Bảng điều khiển quản trị</h1>
+            <button id="btn-logout" style="float: right;">Đăng xuất</button>
+        </header>
+
+        <!-- Crop Management -->
+        <section class="admin-section">
+            <h2>🌱 Quản lý cây trồng</h2>
+            <form id="crop-form">
+                <div class="form-group">
+                    <label>Tên cây (Tiếng Việt):</label>
+                    <input type="text" id="crop-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Thời gian sinh trưởng (ngày):</label>
+                    <input type="number" id="crop-growth-time" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Giá hạt giống (đ):</label>
+                    <input type="number" id="crop-seed-cost" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>Giá bán (đ):</label>
+                    <input type="number" id="crop-sell-price" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>Tần suất tưới (ngày):</label>
+                    <input type="number" id="crop-water-freq" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Mùa phù hợp:</label>
+                    <select id="crop-season" multiple>
+                        <option value="spring">Xuân</option>
+                        <option value="summer">Hạ</option>
+                        <option value="autumn">Thu</option>
+                        <option value="winter">Đông</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Thêm/Cập nhật cây trồng</button>
+            </form>
+            <div id="crops-list"></div>
+        </section>
+
+        <!-- Animal Management -->
+        <section class="admin-section">
+            <h2>🐄 Quản lý vật nuôi</h2>
+            <form id="animal-form">
+                <div class="form-group">
+                    <label>Tên vật nuôi:</label>
+                    <input type="text" id="animal-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Giá mua (đ):</label>
+                    <input type="number" id="animal-price" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>Loại sản phẩm:</label>
+                    <input type="text" id="animal-product" placeholder="Trứng, Sữa, Thịt..." required>
+                </div>
+                <div class="form-group">
+                    <label>Chu kỳ sản xuất (ngày):</label>
+                    <input type="number" id="animal-production-rate" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Nhu cầu thức ăn/ngày:</label>
+                    <input type="number" id="animal-food-need" min="1" required>
+                </div>
+                <button type="submit" class="btn-primary">Thêm/Cập nhật vật nuôi</button>
+            </form>
+            <div id="animals-admin-list"></div>
+        </section>
+
+        <!-- Market & Economy -->
+        <section class="admin-section">
+            <h2>💰 Quản lý thị trường</h2>
+            <form id="market-form">
+                <div class="form-group">
+                    <label>Biến động giá tối đa (%):</label>
+                    <input type="number" id="price-fluctuation" min="0" max="100" value="20">
+                </div>
+                <div class="form-group">
+                    <label>Kích hoạt sự kiện đặc biệt:</label>
+                    <select id="trigger-event">
+                        <option value="">-- Chọn sự kiện --</option>
+                        <option value="festival">Lễ hội (giá tăng)</option>
+                        <option value="crash">Sụp đổ thị trường</option>
+                        <option value="lucky">Ngày may mắn</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Áp dụng thay đổi</button>
+            </form>
+        </section>
+
+        <!-- Weather Control -->
+        <section class="admin-section">
+            <h2>🌦️ Điều khiển thời tiết</h2>
+            <form id="weather-form">
+                <div class="form-group">
+                    <label>Thời tiết ngày mai:</label>
+                    <select id="force-weather">
+                        <option value="">Ngẫu nhiên</option>
+                        <option value="sunny">Nắng</option>
+                        <option value="rain">Mưa</option>
+                        <option value="storm">Bão</option>
+                        <option value="drought">Hạn hán</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Xác suất mưa (%):</label>
+                    <input type="number" id="rain-probability" min="0" max="100" value="30">
+                </div>
+                <button type="submit" class="btn-primary">Cập nhật thời tiết</button>
+            </form>
+        </section>
+
+        <!-- Player Resources -->
+        <section class="admin-section">
+            <h2>👤 Tài nguyên người chơi</h2>
+            <form id="player-form">
+                <div class="form-group">
+                    <label>Thêm tiền (đ):</label>
+                    <input type="number" id="add-money" value="0">
+                </div>
+                <div class="form-group">
+                    <label>Đặt cấp độ:</label>
+                    <input type="number" id="set-level" min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label>Mở khóa mở rộng:</label>
+                    <button type="button" id="unlock-expansion" class="btn-secondary">Mở khóa tất cả</button>
+                </div>
+                <button type="submit" class="btn-primary">Áp dụng</button>
+            </form>
+        </section>
+    </div>
+
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>

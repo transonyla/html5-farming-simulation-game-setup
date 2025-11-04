@@ -1,26 +1,121 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modern Landing Page</title>
-    <meta name="description" content="Buildify landing page template" />
-    <meta name="author" content="Your Company" />
 
-    <meta property="og:title" content="Buildify Template Landing Page" />
-    <meta
-      property="og:description"
-      content="Buildify landing page template"
-    />
-    <meta property="og:type" content="website" />
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nông Trại Vui Vẻ - Farming Simulator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Header -->
+        <header id="game-header">
+            <h1>🌾 Nông Trại Vui Vẻ</h1>
+            <div id="player-stats">
+                <span id="money-display">💰 Tiền: <strong>0đ</strong></span>
+                <span id="level-display">⭐ Cấp: <strong>1</strong></span>
+                <span id="stamina-display">⚡ Thể lực: <strong>100/100</strong></span>
+            </div>
+        </header>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@your_handle" />
-  </head>
+        <!-- Main game area -->
+        <div id="game-main">
+            <!-- Left sidebar - Farm view -->
+            <aside id="farm-view">
+                <div id="time-weather">
+                    <div id="day-info">Ngày <span id="day-number">1</span> - <span id="season">Xuân</span></div>
+                    <div id="weather-info">☀️ <span id="weather-text">Nắng</span></div>
+                    <div id="time-info">Giờ: <span id="time-display">06:00</span></div>
+                </div>
+                <canvas id="farm-canvas" width="600" height="400"></canvas>
+                <div id="canvas-controls">
+                    <button id="zoom-in">🔍+</button>
+                    <button id="zoom-out">🔍-</button>
+                </div>
+            </aside>
 
-  <body>
-    <div id="root"></div>
-    <div id="buildify-script-container"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+            <!-- Right sidebar - Controls & Info -->
+            <aside id="control-panel">
+                <div id="menu-tabs">
+                    <button class="tab-btn active" data-tab="actions">Hành động</button>
+                    <button class="tab-btn" data-tab="shop">Cửa hàng</button>
+                    <button class="tab-btn" data-tab="inventory">Kho đồ</button>
+                    <button class="tab-btn" data-tab="animals">Vật nuôi</button>
+                    <button class="tab-btn" data-tab="buildings">Công trình</button>
+                </div>
+
+                <!-- Actions Tab -->
+                <div id="tab-actions" class="tab-content active">
+                    <h3>Hành động nhanh</h3>
+                    <div class="action-buttons">
+                        <button id="btn-plant">🌱 Trồng cây</button>
+                        <button id="btn-water">💧 Tưới nước</button>
+                        <button id="btn-harvest">🌾 Thu hoạch</button>
+                        <button id="btn-feed-animals">🥕 Cho ăn</button>
+                        <button id="btn-collect">🥚 Thu thập</button>
+                        <button id="btn-sleep">😴 Ngủ (kết thúc ngày)</button>
+                    </div>
+                </div>
+
+                <!-- Shop Tab -->
+                <div id="tab-shop" class="tab-content">
+                    <h3>Cửa hàng</h3>
+                    <div id="shop-categories">
+                        <button class="shop-cat-btn active" data-category="seeds">Hạt giống</button>
+                        <button class="shop-cat-btn" data-category="animals">Vật nuôi</button>
+                        <button class="shop-cat-btn" data-category="tools">Công cụ</button>
+                    </div>
+                    <div id="shop-items"></div>
+                </div>
+
+                <!-- Inventory Tab -->
+                <div id="tab-inventory" class="tab-content">
+                    <h3>Kho đồ</h3>
+                    <div id="inventory-list"></div>
+                    <button id="btn-sell-items">💰 Bán hàng</button>
+                </div>
+
+                <!-- Animals Tab -->
+                <div id="tab-animals" class="tab-content">
+                    <h3>Quản lý vật nuôi</h3>
+                    <div id="animals-list"></div>
+                </div>
+
+                <!-- Buildings Tab -->
+                <div id="tab-buildings" class="tab-content">
+                    <h3>Công trình & Nâng cấp</h3>
+                    <div id="buildings-list"></div>
+                </div>
+
+                <!-- Event Log -->
+                <div id="event-log">
+                    <h4>Nhật ký sự kiện</h4>
+                    <div id="log-messages"></div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Footer controls -->
+        <footer id="game-footer">
+            <button id="btn-save">💾 Lưu game</button>
+            <button id="btn-load">📂 Tải game</button>
+            <button id="btn-new-game">🆕 Game mới</button>
+            <button id="btn-settings">⚙️ Cài đặt</button>
+        </footer>
+    </div>
+
+    <!-- Welcome Modal -->
+    <div id="welcome-modal" class="modal">
+        <div class="modal-content">
+            <h2>🌾 Chào mừng đến Nông Trại Vui Vẻ!</h2>
+            <p>Bắt đầu hành trình làm nông của bạn</p>
+            <button id="btn-continue" class="btn-primary">Tiếp tục game</button>
+            <button id="btn-start-new" class="btn-secondary">Bắt đầu mới</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
 </html>
